@@ -14,7 +14,8 @@ public class SD05_hoverCategories {
     }
 
     @When("user select random one of the three sub categories")
-    public void userSelectRandomOneOfTheThreeSubCategories() {
+    public void userSelectRandomOneOfTheThreeSubCategories() throws InterruptedException {
+        p03.SelectSubCategory();
     }
 
     @And("Get the text of sub category page")

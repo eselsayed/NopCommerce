@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 import org.openqa.selenium.support.Color;
+
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 
@@ -60,15 +62,23 @@ public class p03_HomePage {
     //////////
     ////HoverOnCategories
     public void HoverOnCategories() throws InterruptedException {
-        List<WebElement>mainCategory =Hooks.driver.findElements(By.xpath("/html/body/div[6]/div[2]/ul[1]/li/a"));
-        for(int i=0;i<3;i++){
-            int count = mainCategory.size();
-            System.out.println("count is "+count);
-//        action.moveToElement(Category).build().perform();
-//        action.click(Category).perform();
-          Thread.sleep(4000);
+        List<WebElement>Categories =Hooks.driver.findElements(By.xpath("/html/body/div[6]/div[2]/ul[1]/li/a"));
+        int count = Categories.size();
+        int min=0;
+        int max = count-1;
+        int selectedCategory = (int)Math.floor(Math.random()*(max-min+1)+min);
+        action.moveToElement(Categories.get(selectedCategory)).build().perform();
+        Thread.sleep(4000);
         }
-     }
+
+//        ////SelectSubCategory
+    public void SelectSubCategory() throws InterruptedException {
+        Random rand=new Random();
+        List<WebElement>SubCategories =Hooks.driver.findElements(By.xpath("/html/body/div[6]/div[2]/ul[1]/li[1]/ul/li/a"));
+        SubCategories.get(rand.nextInt(SubCategories.size())).click();
+        Thread.sleep(4000);
+    }
+
 
 
     //ClickOnFirstSlider
