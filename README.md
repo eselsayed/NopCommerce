@@ -1,16 +1,8 @@
-# A first-level  Registration Feature
-one scenario is required
-Prepare your files:
-your feature file will be:
-src >> main >> resources >> features >> F01_Register.feature (Remember to add @smoke)
-your step definition class will be:
-src >> test >> java >> org.example >> stepDefs >> D01_registerStepDef
-your class to apply pom design pattern in your project will be:
-src >> test >> java >> org.example >> pages >> P01_register
+**1. Registration Feature :**
+ 
 Description:
 you need to create only one scenario in this feature file to verify that user could signup with valid account
-Feature File:
-src >> main >> resources >> features >> F01_Register.feature
+ 
 @smoke
 Feature: F01_Register | users could register with new accounts
 Scenario: guest user could register with valid data successfully
@@ -22,23 +14,7 @@ Step 5 user enter email "test@example.com" field
 Step 6 user fills Password fields "P@ssw0rd" "P@ssw0rd"
 Step 7 user clicks on register button
 Step 8 success message is displayed
-Replace Steps with the appropriate Keywords (Given, When, Then, And)
-for example, you will replace Step 1 with Given and Step 2 with When and so one
-Example on Step 1
-* open src >> test >> java >> org.example >> pages >> P01_register
-create WebElement method to register button
- public WebElement registerlink()
- {
- return Hooks.driver.findElement(By.cssSelector("a[class=\"ico-signUp\"]"));
- }
-* open src >> test >> java >> org.example >> stepDefs >> D01_registerStepDef
-//Create new object from P01_register
-P01_register register = new P01_register();
- @Given("user go to register page")
- public void go_to_register()
- {
-register.registerlink().click();
- }
+ 
 * Follow same thing with all the remaining steps and don't forget to apply POM Design pattern on each step
 * In step 4
 you should check if the birthdate lists are static or dynamic then decide if you will use Select class in Selenium to handle
@@ -49,24 +25,13 @@ Use soft assertion to verify the following
 - the color of this message is green rgba(76, 177, 124, 1)
 Note: we need to get the "color" not "background-color" using getCssValue command which is already explained
 in Selenium Commands Chapter
-Reviewers will check the following
-1- Student selects the correct Keywords in feature file
-2- Student applied Select class to handle static dropdown lists
-3- POM Design pattern is applied in step definition class correctly
-4- Student applied Soft assertion as required for all scenarios
+ 
 
 
 
   
-Login Feature
-2 scenarios are required
-Prepare your files:
-your feature file will be:
-src >> main >> resources >> features >> F02_Login.feature (Remember to add @smoke)
-your step definition class will be:
-src >> test >> java >> org.example >> stepDefs >> D02_loginStepDef
-your class to apply pom design pattern in your project will be:
-src >> test >> java >> org.example >> pages >> P02_login
+**2. Login Feature: **
+ 
 in your feature file write the following
 @smoke
 Feature: F02_Login | users could use login functionality to use their accounts
@@ -80,9 +45,7 @@ Step 1 user go to login page
 Step 2 user login with "invalid" "wrong@example.com" and "P@ssw0rd"
 Step 3 user press on login button
 Step 4 user could not login to the system
-* Replace Steps with the appropriate Keywords (Given, When, Then, And)
-* You should pass type, username, password values from feature file
-What to assert exactly?
+* 
 For Scenario 1
 Use soft assertion to verify the following
 1- getCurrentUrl and verify it equals https://demo.nopcommerce.com/
@@ -93,32 +56,10 @@ Use soft assertion to verify the following
 1- error message contains "Login was unsuccessful."
 2- the color of this message is red "#e4434b"
 don't forget assertAll()
-Notes:
-- the output of any color attribute is RGBA and could be converted to Hex value using this code
-import org.openqa.selenium.support.Color;
-Color.fromString("rgba(228, 67, 75, 1)").asHex(); //output will be #e4434b
-Reviewers will check the following
-1- Student selects the correct Keywords in feature file
-2- parameters are passed correctly from feature file
-3- POM Design pattern is applied in step definition class correctly
-4- Student applied Soft assertion as required for all scenarios
-
-
-
-
-
   
-Currencies Feature
-one scenario is required
-Prepare your files:
-your feature file will be:
-src >> main >> resources >> features >> F03_currencies.feature (Remember to add @smoke)
-your step definition class will be:
-src >> test >> java >> org.example >> stepDefs >> D03_currenciesStepDef
-your class to apply pom design pattern in your project will be:
-src >> test >> java >> org.example >> pages >> P03_homePage
-What you will learn?
-The purpose of this scenario is to learn how to use findElements
+  
+**3.Currencies Feature :**
+ 
 Steps:
 1- Select Euro currency from the dropdown list on the top left of home page
 2- Use hard assertion to verify Euro Symbol (€) is shown on the 4 products displayed in Home page
@@ -126,58 +67,11 @@ in this step you should create for loop
 2.1- use findElements with get(i) method then use getText()
 2.2- save the output inside variable
 2.3- do hard assert to verify that the variable contains "€"
-Note when applying POM Design with findElements >> you should make your method List<WebElement> not
-WebElement
-Remember:
-The difference between findElement & findElements commands
-findElement >> click(), sendKeys(""), isDisplayed()
-findElements >> size(), get(), isEmpty()
-Reviewers will check the following
-1- Student selects the correct Keywords in feature file
-2- POM Design pattern is applied in step definition class correctly
-2.1- List<WebElement> method is used in POM Design Pattern
-3- Student applies for loop correctly
-4- Student applies Soft assertion as required for all scenarios
+ 
 
+**4.Search Feature:**
+ 
 
-
-
-
-
-Search Feature
-2 scenarios are required
-Prepare your files:
-your feature file will be:
-src >> main >> resources >> features >> F04_Search.feature (Remember to add @smoke)
-your step definition class will be:
-src >> test >> java >> org.example >> stepDefs >> D04_searchStepDef
-your class to apply pom design pattern in your project will be:
-src >> test >> java >> org.example >> pages >> P03_homePage
-What you should do?
-You will learn how to apply Scenario Outline in cucumber
-Explanation:
-Scenario outline basically replaces variable/keywords with the value from the table.
-Each row in the table is considered to be a scenario.
-Scenario Outline: Login functionality for a social networking site.
-Given user navigates to Facebook
-When I enter Username as "<username>" and Password as "<password>"
-Then login should be unsuccessful
-Examples:
-| username | password |
-| Test1 | Pass1 |
-| Test2 | Pass2 |
-| Test3 | Pass3 |
-In this example, the scenario will run 3 times.
-First Time will use Test1, Pass1 as inputs and Second time will be Test2, Pass2 and so on
-Note: username & password are the variable name and not considered as one of the inputs
-Scenarios:
-Scenario Outline 1 user could search using product name
-Examples: book, laptop, nike
-Scenario Outline 2 user could search for product using sku
-Examples: SCI_FAITH, APPLE_CAM, SF_PRO_11
-Note: sku means serial number of the product
-for example open this link https://demo.nopcommerce.com/apple-macbook-pro-13-inch you will find sku is
-"AP_MBP_13"
 Scenario Outline 1
 Use soft assertion to verify the following
 1- url contains https://demo.nopcommerce.com/search?q=
@@ -190,32 +84,15 @@ Scenario Outline 2
 2- After searching, you need to click on the product in search result
 3- Use hard assertion to verify the following
 3.1- get the sku shown in this page then make sure it contains the sku that you are using in search
-Reviewers will check the following
-1- Student selects the correct Keywords in feature file
-2- Student uses scenario outline as explained
-3- POM Design pattern is applied in step definition class correctly
-3.1- List<WebElement> method is used in POM Design Pattern
-4- Student applies for loop correctly
-5- assertions are implemented
+ 
 
 
 
 
 
 
-hoverCategories Feature
-one scenario is required
-Prepare your files:
-your feature file will be:
-src >> main >> resources >> features >> F05_hoverCategories.feature (Remember to add @smoke)
-your step definition class will be:
-src >> test >> java >> org.example >> stepDefs >> D05_hoverCategoriesStepDef
-your class to apply pom design pattern in your project will be:
-src >> test >> java >> org.example >> pages >> P03_homePage
-What you need to do?
-In this test scenario you will use Actions class in Selenium framework to hover on one of main categories then click on
-sub category
-Scenario steps:
+ 
+**5.Scenario steps:**
 1- in Home page, there are 3 main categories contains sub-categories
 [Computers, Electronics, Apparel]
 2- you need to select random one of the three main categories
