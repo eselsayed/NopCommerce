@@ -1,6 +1,7 @@
 package Pages;
 
 import StepDef.Hooks;
+import net.bytebuddy.agent.builder.AgentBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -62,23 +63,33 @@ public class p03_HomePage {
     //////////
     ////HoverOnCategories
     public void HoverOnCategories() throws InterruptedException {
-        List<WebElement>Categories =Hooks.driver.findElements(By.xpath("/html/body/div[6]/div[2]/ul[1]/li/a"));
-        int count = Categories.size();
-        int min=0;
-        int max = count-1;
-        int selectedCategory = (int)Math.floor(Math.random()*(max-min+1)+min);
+        List<WebElement>Categories =Hooks.driver.findElements(By.xpath("/html/body/div[6]/div[2]/ul[1]/li"));
+        int selectedCategory = (int) (Math.random() * 3);
         action.moveToElement(Categories.get(selectedCategory)).build().perform();
-        Thread.sleep(4000);
+        ///////////////////
+        List<WebElement>SubCategories =Hooks.driver.findElements(By.xpath("/html/body/div[6]/div[2]/ul[1]/li["+(selectedCategory+1)+"]/ul/li"));
+        int selectedSubCategory = (int) (Math.random() * 3);
+        if(SubCategories.isEmpty()){
+            Categories.get(selectedCategory).click();
+        }else {
+            SubCategories.get(selectedSubCategory).click();
+        }
+        Thread.sleep(5000);
         }
 
-//        ////SelectSubCategory
-    public void SelectSubCategory() throws InterruptedException {
-        Random rand=new Random();
-        List<WebElement>SubCategories =Hooks.driver.findElements(By.xpath("/html/body/div[6]/div[2]/ul[1]/li[1]/ul/li/a"));
-        SubCategories.get(rand.nextInt(SubCategories.size())).click();
-        Thread.sleep(4000);
+/*        ////SelectSubCategory
+    public void SelectSubCategory() {
+        List<WebElement>SubCategories =Hooks.driver.findElements(By.xpath("/html/body/div[6]/div[2]/ul[1]/li/ul/li/a"));
+        for (int i=0; i<SubCategories.size();i++) {
+            System.out.println(SubCategories.get(i).getText());}
+        int count = SubCategories.size();
+        int min=0;
+        int max = count-1;
+        int selectedSubCategory = (int)Math.floor(Math.random()*(max-min+1)+min);
+        // action.moveToElement(SubCategories.get(selectedSubCategory)).build().perform();
+        SubCategories.get(selectedSubCategory).click();
     }
-
+*/
 
 
     //ClickOnFirstSlider
@@ -131,6 +142,9 @@ public class p03_HomePage {
         Hooks.driver.navigate().to("https://demo.nopcommerce.com/");
 
     }
+
+
+
 
     ///////////////Wishlist
     //ClickOnTheProductWishlistIcon
