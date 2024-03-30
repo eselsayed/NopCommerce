@@ -62,34 +62,36 @@ public class p03_HomePage {
 
     //////////
     ////HoverOnCategories
+    List<WebElement> Categories = Hooks.driver.findElements(By.xpath("/html/body/div[6]/div[2]/ul[1]/li"));
+    int selectedCategory = (int) (Math.random() * 3);
+
     public void HoverOnCategories() throws InterruptedException {
-        List<WebElement>Categories =Hooks.driver.findElements(By.xpath("/html/body/div[6]/div[2]/ul[1]/li"));
-        int selectedCategory = (int) (Math.random() * 3);
         action.moveToElement(Categories.get(selectedCategory)).build().perform();
-        ///////////////////
-        List<WebElement>SubCategories =Hooks.driver.findElements(By.xpath("/html/body/div[6]/div[2]/ul[1]/li["+(selectedCategory+1)+"]/ul/li"));
-        int selectedSubCategory = (int) (Math.random() * 3);
-        if(SubCategories.isEmpty()){
+        Thread.sleep(5000);
+    }
+
+
+    List<WebElement> SubCategories = Hooks.driver.findElements(By.xpath("/html/body/div[6]/div[2]/ul[1]/li[" + (selectedCategory + 1) + "]/ul/li"));
+    int selectedSubCategory = (int) (Math.random() * 3);
+
+    public void ClickOnSubCategory() throws InterruptedException {
+        if (SubCategories.isEmpty()) {
             Categories.get(selectedCategory).click();
-        }else {
+        } else {
             SubCategories.get(selectedSubCategory).click();
         }
         Thread.sleep(5000);
+    }
+
+    public void GetAndVerifySubCatText(){
+        String subCatText =Hooks.driver.findElement(By.xpath("/html/body/div[6]/div[3]/div/div[3]/div/div[1]/h1")).getText().toLowerCase().trim();
+        System.out.println(subCatText);
+        System.out.println(SubCategories.get(selectedSubCategory).getText());
+//        Assert.assertEquals(subCatText,SCText);
         }
 
-/*        ////SelectSubCategory
-    public void SelectSubCategory() {
-        List<WebElement>SubCategories =Hooks.driver.findElements(By.xpath("/html/body/div[6]/div[2]/ul[1]/li/ul/li/a"));
-        for (int i=0; i<SubCategories.size();i++) {
-            System.out.println(SubCategories.get(i).getText());}
-        int count = SubCategories.size();
-        int min=0;
-        int max = count-1;
-        int selectedSubCategory = (int)Math.floor(Math.random()*(max-min+1)+min);
-        // action.moveToElement(SubCategories.get(selectedSubCategory)).build().perform();
-        SubCategories.get(selectedSubCategory).click();
-    }
-*/
+
+
 
 
     //ClickOnFirstSlider

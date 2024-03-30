@@ -14,16 +14,12 @@ public class SD05_hoverCategories {
     }
 
     @When("user select random one of the three sub categories")
-    public void userSelectRandomOneOfTheThreeSubCategories() {
-
+    public void userSelectRandomOneOfTheThreeSubCategories() throws InterruptedException {
+        p03.ClickOnSubCategory();
     }
 
-    @And("Get the text of sub category page")
-    public void getTheTextOfSubCategoryPage() {
-
-    }
-
-    @Then("verify that sub-category title is the same")
-    public void verifyThatSubCategoryTitleIsTheSame() {
+    @Then("Get the text of sub category page &verify that sub-category title is the same")
+    public void getTheTextOfSubCategoryPageVerifyThatSubCategoryTitleIsTheSame() {
+        p03.GetAndVerifySubCatText();
     }
 }
